@@ -1,13 +1,13 @@
 ﻿import PDFPreview from "./pdf-preview";
 import NotificationHelper from "./notification-helper";
-import Header from "./header";
+import Header from "./Header";
 import MobileNavigation from "./mobile-navigation";
-import Selection from "./selection";
-import Dropdown from "./dropdown";
+import Selection from "./Selection";
+import Dropdown from "./Dropdown";
 import SearchBox from "../../../Features/Search/search-box";
-import ContentSearch from "../../../Features/Search/search";
+import ContentSearch from "../../../Features/Search/Search";
 import Blog from "../../../Features/Blog/blog";
-import Locations from "../../../Features/Locations/locations";
+import Locations from "../../../Features/Locations/Locations";
 import People from "Features/People/people";
 
 export default class FoundationCms {

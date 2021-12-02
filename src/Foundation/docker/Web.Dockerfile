@@ -2,17 +2,18 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 8000
 
-#FROM node:lts AS node
-#WORKDIR /src
-#COPY . .
-#RUN npm install
-#RUN npm run dev
-
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
-WORKDIR /src
-#COPY --from=node . .
+FROM node:14-buster-slim AS node_base
 COPY . .
-RUN dotnet restore "Foundation.csproj" --configfile ./Nuget.config
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+COPY --from=node_base . .
+
+WORKDIR /src
+#COPY ./Foundation.csproj Foundation.csproj
+COPY . .
+RUN dotnet restore "Foundation.csproj" --configfile ../Nuget.config
+
+RUN npm ci
+RUN npm run dev
 
 #RUN dotnet build "Foundation.csproj" -c Release -o /app/build
 RUN dotnet build "Foundation.csproj" -c Debug -o /app/build
