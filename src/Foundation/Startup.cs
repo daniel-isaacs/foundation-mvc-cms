@@ -27,6 +27,7 @@ namespace Foundation
 
         public void ConfigureServices(IServiceCollection services)
         {
+			services.AddRouting(options => options.LowercaseUrls = true);
             services.AddCmsAspNetIdentity<SiteUser>();
             services.AddMvc(o => o.Conventions.Add(new FeatureConvention()))
                 .AddRazorOptions(ro => ro.ViewLocationExpanders.Add(new FeatureViewLocationExpander()));
