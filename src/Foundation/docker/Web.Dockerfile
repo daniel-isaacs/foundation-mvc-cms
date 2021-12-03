@@ -22,7 +22,7 @@ FROM build AS publish
 #RUN dotnet publish "Foundation.csproj" -c Release -o /app/publish
 RUN dotnet publish "Foundation.csproj" -c Debug -o /app/publish
 COPY ./docker/build-script/wait_sqlserver_start_and_attachdb.sh /app/publish/wait_sqlserver_start_and_attachdb.sh
-COPY ./License.config /app/publish/License.config
+#COPY ./License.config /app/publish/License.config
 RUN chmod -R 777 /app/publish/wait_sqlserver_start_and_attachdb.sh
 #COPY ./App_Data/foundation.episerverdata /app/publish/App_Data/foundation.episerverdata
 COPY ./App_Data/* /app/publish/App_Data/
