@@ -8,6 +8,7 @@ using Foundation.Infrastructure.Cms.Users;
 using Foundation.Infrastructure.Display;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -49,6 +50,17 @@ namespace Foundation
             });
             services.TryAddEnumerable(Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton(typeof(IFirstRequestInitializer), typeof(ContentInstaller)));
             services.AddDetection();
+			
+            services.Configure<FormOptions>(x =>
+            {
+                x.ValueLengthLimit = 5000; // Limit on individual form values
+                x.MultipartBodyLengthLimit = 268435456; // Limit on form body size
+                x.MultipartHeadersLengthLimit = 268435456; // Limit on form header size
+            });
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.MaxRequestBodySize = 837280000; // Limit on request body size
+            });
         }
 
 
