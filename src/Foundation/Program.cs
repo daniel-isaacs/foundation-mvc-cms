@@ -10,7 +10,7 @@ namespace Foundation
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
-                .WriteTo.File("app_data/log.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File("App_Data/log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             CreateHostBuilder(args).Build().Run();
