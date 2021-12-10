@@ -51,6 +51,7 @@ namespace Foundation
             services.TryAddEnumerable(Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton(typeof(IFirstRequestInitializer), typeof(ContentInstaller)));
             services.AddDetection();
 			
+			// Increase allowed upload file size
             services.Configure<FormOptions>(x =>
             {
                 x.ValueLengthLimit = 5000; // Limit on individual form values
@@ -61,6 +62,12 @@ namespace Foundation
             {
                 options.MaxRequestBodySize = 837280000; // Limit on request body size
             });
+			
+			// Disable websockets
+			services.Configure<UIOptions>(options =>
+			{
+				options.WebSocketEnabled = false;
+			});
         }
 
 
